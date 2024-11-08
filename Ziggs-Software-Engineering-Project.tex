@@ -1,0 +1,518 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{ZIGGS - Anomaly Detection at Home Based on Sound Systems}
+\author{
+\IEEEauthorblockN{1\textsuperscript{st} Jan Imhof}
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\
+\textit{Karlsruhe Institute of Technology}\\
+Karlsruhe, Germany \\
+uwxdb@student.kit.edu}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Ivan Milosavljevic}
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\
+\textit{Institut Supérieur d'Éléctronique de Paris}\\
+Boulogne-Billancourt, France \\
+ivmi61663@eleve.isep.fr}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Nicolas Busquet}
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\
+\textit{L'École d'Informatique en Alternance}\\
+Nanterre, France \\
+nrb.busquet@gmail.com}
+\and
+% Centered fourth author
+\IEEEauthorblockN{\hspace{7.1cm}4\textsuperscript{th} Adrian Obermuehlner}
+\IEEEauthorblockA{\hspace{7.1cm}\textit{Computer Science Dep.} \\
+\hspace{7.1cm}\textit{ZHAW Zurich Unversity of Applied Sciences}\\
+\hspace{7.1cm}Zurich, Switzerland \\
+\hspace{7.1cm}aobermuhlner@gmail.com}
+}
+
+
+
+
+\maketitle
+
+\section{Introduction}
+\subsection{Motivation}
+In today’s fast-paced world, ensuring the safety and security of our homes and loved ones has become more critical than ever. Whether it is monitoring elderly family members living independently, ensuring the safety of children, or keeping track of pets when left alone, there is a growing demand for intelligent home monitoring solutions that go beyond basic video surveillance. Traditional security systems often fail to detect nuanced or specific audio-based events such as sudden loud noises, breaking glass, or periods of unusual silence, which can be indicators of emergencies or safety concerns.
+
+The development of an acoustic abnormality detection system utilizing machine learning and IoT devices fills this crucial gap in the market. This innovative software will enable continuous monitoring of environmental sounds through LG's IoT devices, which are already well-integrated into modern smart homes. The use of machine learning allows the system to detect and analyze abnormal audio patterns, such as an elderly person calling for help, a child in distress, or even a pet knocking over an object. Unlike traditional static systems, the machine learning component will learn and improve from new sound data recorded within each household, tailoring its response to the specific acoustic environment of every home.
+
+By integrating this solution with LG's ecosystem of IoT devices, users will have access to a comprehensive, real-time sound monitoring system that adapts to their unique needs. The system will send timely alerts to their mobile devices, allowing them to respond immediately to any potentially dangerous or unusual situations. This adaptive learning capability, combined with the flexibility of using various LG IoT devices such as smart speakers, cameras, or even home appliances, ensures that the system provides an enhanced, personalized safety net for users.
+
+The primary use cases for this system include elderly care, where rapid response to abnormal sounds could prevent accidents or health emergencies; child safety monitoring, where sudden loud noises or periods of unusual silence could indicate a problem; and pet monitoring, where the system can alert owners to disturbances caused by their pets. As homes become more connected, the need for advanced audio-based monitoring systems is increasingly evident, making this software a valuable addition to the market.
+
+\subsection{Problem Statement}
+Current home monitoring systems fail to effectively detect crucial audio cues like breaking glass or sudden loud noises, often resulting in missed events or frequent false alarms. These systems also lack the ability to adapt to the unique sound environments of individual households, making them unreliable for families with elderly members, children, or pets.
+
+Our solution addresses this by using machine learning and IoT devices to continuously monitor sounds and detect abnormalities. Through user feedback, the system will refine its model over time, adapting to each household and reducing false alarms, ensuring timely and accurate alerts.
+
+\subsection{Related Software}
+\textbf{SimpliSafe}: This is a well-known home security app that pairs with its proprietary camera and detection systems. While primarily focused on video monitoring, SimpliSafe uses various sensors, such as motion detectors and entry sensors, to identify potential intrusions. Sound detection is used in a specialized way, mainly for detecting the sound of breaking glass, which is a common indicator of a break-in.
+
+\textbf{ASTRA}: This app is described as “state of the art” for anomaly detection, with a focus on video data. ASTRA uses advanced algorithms and artificial intelligence to identify unusual activities through video feeds, which can include identifying abnormal movements or behaviors. Its strength lies in video anomaly detection, making it suitable for environments where visual analysis is more critical than audio.
+
+\textbf{Edge Impulse}: Edge Impulse provides a platform that integrates machine learning with IoT devices, focusing on real-time anomaly detection for environmental and acoustic monitoring. Their system is highly adaptable and has been deployed in various use cases, from smart home appliances to wearables. They emphasize ease of use, allowing developers to collect audio data, train models, and deploy them on IoT devices for real-time detection.
+
+\textbf{Echo-Guard}: This system focuses on detecting anomalous sounds in smart manufacturing environments. It uses acoustic sensors combined with machine learning to monitor the sounds produced by machinery and detect abnormal events, such as equipment failure or unexpected noises. Its use of convolutional neural networks (CNN) helps to convert audio data into spectrograms, enabling the system to classify and detect anomalies in real-time.
+
+\section{Role Assignments}
+\begin{table}[H]
+    \centering
+    \caption{Role Assignments}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.6cm}|m{4.8cm}|}
+        \hline
+        \textbf{Role} & \textbf{Name} & \textbf{Task Description} \\
+        \hline
+        AI Developer & Adrian Samuel & Specializes in designing and optimizing machine learning algorithms to identify abnormal sounds in a home environment. Responsible for training the model using diverse audio data, allowing it to recognize and adapt to different household sound profiles, such as elderly distress calls, child-related noises, or pet disturbances. Ensures continuous learning from new data, refining accuracy and effectiveness in detecting potential emergencies. \\
+        \hline
+        back-end Developer & Ivan Milosavljevic & Responsible for the development and integration of the back-end architecture that connects LG’s IoT devices with the acoustic monitoring system. This includes managing the database to store audio data, implementing security protocols for user authentication, and building APIs for smooth data transmission and real-time alerts. Oversees scalability to handle continuous audio streams and machine learning updates. \\
+        \hline
+        front-end Developer & Jan Imhof & Focuses on designing and developing the user interface (UI) and user experience (UX) for the mobile and web platforms that enable users to monitor sound-based events in their homes. Ensures seamless interaction between users and the system, including configuring alerts and viewing real-time audio analysis. Key tasks include testing, debugging, and refining the interface for ease of use across various devices. \\
+        \hline
+        front-end Developer & Nicolas Busquet & Oversees the visual design and interaction elements of the user-facing components, ensuring that users receive notifications and alerts in a visually engaging and intuitive manner. Works with tools like Figma to create clean, responsive designs that facilitate quick responses to detected abnormalities, tailored for users with specific needs such as elderly care or pet monitoring. \\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+
+\section{Requirements Analysis}
+\subsection{User Account Management}
+\subsubsection{Sign Up}
+\textbf{Context:} The sign-up screen serves as the main entry point for new users to create their accounts. The login functionality is integrated into the same screen, allowing both new registrations and returning users to access their accounts seamlessly.
+
+\textbf{Information Required for Sign Up:}
+\begin{itemize}
+    \item \textbf{Email:} The user’s email address will be used for sending alerts, notifications, and other important communications. It is also necessary for account recovery and validation.
+    \item \textbf{ID/Username:} Users must create a unique identifier for their account, up to 12 characters long. This ID is used to recognize the user within the system and provides an alternative to using their email for login.
+    \item \textbf{Password:} Users must create a secure password that meets the following criteria:
+    \begin{itemize}
+        \item Minimum of 8 characters
+        \item Includes lower-case and upper-case letters
+        \item Contains numbers and symbols to enhance security
+        \item Passwords are encrypted using SHA256 to protect against data breaches and ensure that login data is not stored in plain text.
+    \end{itemize}
+    \item \textbf{Personal Information:} Users are required to provide their first and last names, phone number, emergency phone number, and postal address. This information helps ensure that in the case of an alert that isn’t acknowledged promptly, emergency contacts can be reached.
+\end{itemize}
+
+\textbf{Email Validation:}
+\begin{itemize}
+    \item After users complete the registration form, a verification code is sent to the provided email address.
+    \item The user must enter this code to confirm their email before completing the registration. This ensures the email is valid and accessible by the user.
+\end{itemize}
+
+\textbf{Redirection:}
+\begin{itemize}
+    \item Upon successful registration, users are automatically redirected to the login page to access their account using their new credentials.
+\end{itemize}
+
+\subsubsection{Login}
+\textbf{Context:} The login page is the main gateway for returning users to access their accounts and monitor their home environment. It ensures that only authorized users can access the system.
+
+\textbf{Required Information for Login:}
+\begin{itemize}
+    \item \textbf{Email or Username/ID:} Users can log in using either their registered email or their unique username.
+    \item \textbf{Password:} The user’s password is required for authentication. The system verifies the encrypted password stored in the database.
+\end{itemize}
+
+\textbf{Password Recovery:}
+\begin{itemize}
+    \item If a user forgets their password, they can request a password reset link via email.
+    \item A code or link is sent to their registered email, allowing them to set a new password following the same security requirements.
+\end{itemize}
+
+\subsubsection{Administrator Back-office}
+The website is maintained by admin users. These admin users have access to the back-office part of the website from where they can manage the different items of it (e.g. user accounts, feedback tickets...)
+
+\textbf{User accounts management}
+\begin{itemize}
+    \item \textbf{Display users:} The administrator have access to a screen which display all the users account created. It displays the information of each user except the confidential ones. The accounts can be sorted by name (alphabetical) or date of creation or of birth. It is also possible to search a user from a search bar.
+    \item \textbf{Delete users:} The administrator has the right to delete a user account. It should be used only follow on from a user request.
+    \item \textbf{Manage user password:} The administrator is able to send an email for resetting the password of a user. 
+    \item The administrator is able to block the access to the feedback ticket system to a user. It is necessary in case of spamming, flooding or disrespect from a user.
+\end{itemize}
+
+\textbf{Feedback tickets management}
+\begin{itemize}
+    \item \textbf{Display tickets:} The administrator have access to a screen which display all the feedback tickets sent by the users. The tickets can be sorted by date or alphabetical order. They can also be filtered by user, date or status. It's possible to open the ticket page by clicking on it.
+    \item \textbf{Answer tickets:} The administrator can answer a ticket from its page. While answering, it is possible to change the ticket status. When a ticket is answered, its author is notified by email.
+    \item \textbf{Ticket status:} A ticket can have 4 different status. When received, the status is set to \textit{unread} by default. On the ticket page, the administrator can change the status to \textit{in process}, \textit{solved} or \textit{cancelled}. The \textit{cancelled} status is made for tickets which are not requests or not conform to ethics.
+\end{itemize}
+
+\subsection{User Dashboard}
+Once logged in, users have access to a personalized dashboard where they can monitor alerts, manage their account information, and interact with the system.
+
+\textbf{Alerts History:}
+\begin{itemize}
+    \item Users can view all alerts that have been triggered by the system. These are presented in a tabular format for easy review.
+    \item \textbf{Layout:} The table includes columns for the date, time, type of alert, and a brief description of the event. Users can sort or filter alerts based on specific dates, types of events, or alert status (e.g., resolved or pending).
+    \item Users can click on any alert to see more details, such as the audio snippet that triggered the alert, and provide feedback if the alert was accurate or a false positive.
+\end{itemize}
+
+\textbf{Account Management:}
+\begin{itemize}
+    \item Users can update their personal details, such as their email, phone numbers, or postal address, directly from their profile settings.
+    \item Users have the option to change their password or update their emergency contacts as needed.
+    \item \textbf{Account Deletion:} Users can request to delete their account permanently. This action will remove all personal information, alert history, and preferences from the system. A confirmation step is included to prevent accidental deletions.
+\end{itemize}
+
+\subsection{Feedback Ticket System}
+\begin{itemize}
+    \item Users can send feedback tickets to the administrator from a specific page. There are 2 kinds of tickets : \textit{bug reports} or \textit{general request}.
+    \item When submitting a ticket, users can provide a brief description of the issue, attach screenshots if necessary, and specify the time when the issue occurred if there's one.
+    \item General requests are tickets which are not related to a technical issue. For example, a request for deleting the account or an idea to improve the website.
+\end{itemize}
+
+\subsection{Alerts and Notifications}
+\textbf{Mobile Notifications:} Alerts are sent directly to the user’s smartphone via push notifications. These alerts include a brief description of the detected anomaly (e.g., "Loud crash detected in the living room") and the time of occurrence. A link to view or listen to a recorded snippet of the audio is also included, enabling users to assess the situation quickly.
+
+\textbf{Email Alerts:} For users who may not have access to their mobile app at all times, email notifications are sent. These emails contain details of the anomaly and a link to access the user portal for further investigation.
+
+\textbf{SMS Alerts:} If configured, SMS alerts can be sent to the primary phone number or emergency contact provided during registration. This ensures that users receive alerts even in areas with limited internet connectivity.
+
+\textbf{Emergency Escalation:} If an alert is not acknowledged or responded to within a predefined time frame, the system can automatically escalate the alert to an emergency contact. This feature is particularly useful in scenarios like elderly care or child monitoring, where immediate attention is critical.
+
+\subsection{Dataset Requirements}
+\subsubsection{Normal Data Requirements}
+The model requires a dataset that captures typical sounds in child play environments to accurately represent normal conditions.
+
+\begin{itemize}
+    \item The dataset should include audio from natural, unstructured settings where children are playing, such as kindergartens, homes, or therapy centers.
+    \item The sounds should cover a range of common activities and interactions, reflecting realistic soundscapes in child play environments.
+    \item Audio quality should be sufficient to capture subtle environmental sounds without excessive background noise.
+    \item The dataset selected for these requirements is the \href{https://www.idiap.ch/en/dataset/childplay-gaze}{ChildPlayGaze Dataset}, which provides realistic audio accompanying children’s play and social interactions.
+\end{itemize}
+
+\subsubsection{Abnormal Data Requirements}
+To train the model to recognize unusual or potentially hazardous sounds, the dataset must include a variety of abnormal audio events.
+
+\begin{itemize}
+    \item Abnormal sound events should include loud noises such as crashes, glass breaking, and other unexpected sounds that deviate from typical child play environments.
+    \item These sound events should be clearly labeled to facilitate both supervised and unsupervised anomaly detection.
+    \item Data should be varied to represent a wide range of potential abnormal events, helping the model generalize to new or unknown anomalies.
+\end{itemize}
+
+\subsubsection{Preprocessing Requirements}
+Before using the dataset for model training, audio data must be preprocessed to standardize inputs and improve model performance.
+
+\begin{enumerate}
+    \item \textbf{Audio Trimming}
+    \begin{itemize}
+        \item Audio clips should be limited to a uniform length (e.g., 5 seconds) to ensure consistent input dimensions.
+        \item Trimming is essential to focus on the relevant parts of each sound event and reduce variability in input length.
+    \end{itemize}
+
+    \item \textbf{Mel Spectrogram Conversion}
+    \begin{itemize}
+        \item Audio clips must be converted into mel spectrograms, which represent the frequency content of the sound in a way that aligns with human auditory perception.
+        \item The spectrograms should be stored in a format suitable for machine learning models, such as \texttt{.npy} files.
+        \item Parameters for mel spectrogram generation should be standardized across all audio files to maintain consistency in the input features.
+    \end{itemize}
+\end{enumerate}
+
+\section{System Specifications}
+\subsection{Supervised Learning Requirements}
+\begin{itemize}
+    \item The model must be able to classify sounds based on labeled data.
+    \item It should distinguish between normal and abnormal sounds in various environments.
+    \item The system is expected to identify abnormal sounds, such as breaking glass or loud noises, and categorize them accordingly.
+\end{itemize}
+
+\subsection{Unsupervised Learning Requirements}
+\begin{itemize}
+    \item The model should learn typical patterns in normal sound environments without relying on explicit labeling.
+    \item It must be able to detect deviations from these normal patterns as potential anomalies.
+    \item The system should recognize unfamiliar or novel sounds that may indicate abnormal conditions.
+\end{itemize}
+
+\subsection{Model Personalization and Feedback}
+\begin{itemize}
+    \item After deployment, feedback from users (e.g., parents) on anomalies will be collected.
+    \item This feedback will help the model refine its detection capabilities.
+    \item The system will be personalized to each household's unique sound environment.
+\end{itemize}
+
+\section{Design and Development Environment}
+\subsection{Choice of Software Development Platform}
+\begin{table}[H]
+    \centering
+    \caption{Technology and language justification}
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{|>{\centering\arraybackslash}m{1.7cm}|>{\centering\arraybackslash}m{1.8 cm}|m{5cm}|}
+        \hline
+        \textbf{Technology} & \textbf{Usage} & \textbf{Justification} \\
+        \hline
+        Linux VPS (on AWS) & Web server hosting & 
+        \begin{itemize}
+            \item Easier to configure than a Windows Server
+            \item \textbf{Light OS}: Make it easier to deploy and leave more space for the website.
+            \item \textbf{Fast File System}: Reduce the delay of response of the server because the OS read files faster.
+            \item \textbf{Technologies availability}: Most software are available on Linux.
+        \end{itemize} \\
+        \hline
+        Docker & Deployment, Containerization  & 
+        \begin{itemize}
+            \item \textbf{Better scalability}: Dockerize services composing our software make easier hardware and software upgrades.
+            \item \textbf{Better interoperability}: Containers can be deployed on different OS without causing a bunch of issues.
+            \item \textbf{Service Management}: With every services in a container we can update, stop or restart them easily.
+        \end{itemize} \\
+        \hline
+        Spring Boot 3 (Java) & back-end Development, API Management, Security & 
+        \begin{itemize}
+            \item \textbf{Microservice Architecture}: Supports modular development, crucial for building scalable and maintainable systems.
+            \item \textbf{API Development}: Simplifies REST API creation, enabling seamless communication with the front-end.
+            \item \textbf{Built-in Security}: Offers authentication and authorization mechanisms like OAuth2 and JWT, enhancing security for sensitive user data.
+            \item \textbf{Database Integration}: Easily connects to SQL/NoSQL databases, essential for managing data such as alerts, user profiles, and sound analysis logs.
+            \item \textbf{Java}: Spring Boot uses Java, which is highly stable, widely supported, and suitable for enterprise-level applications, providing robust back-end performance.
+        \end{itemize} \\
+        \hline
+        Vue.js 3 (TypeScript) & front-end Development, Real-time User Interface & 
+        \begin{itemize}
+            \item \textbf{Lightweight \& Fast}: Minimal footprint ensures fast loading times, ideal for responsive user interfaces on both mobile and web platforms.
+            \item \textbf{Reactive Components}: Real-time data binding allows users to receive alerts instantly without refreshing the page.
+            \item \textbf{Component-Based Structure}: Enables the creation of reusable UI elements for dashboards, alerts, and login forms.
+            \item \textbf{TypeScript}: Using TypeScript with Vue.js provides type safety, reducing runtime errors and making the front-end codebase more maintainable and scalable.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+
+\subsection{AI Development Platform}
+This project aims to develop an AI model for detecting anomalies in audio data. The development is performed using \textbf{Google Colab}, which provides a cloud-based environment with access to an NVIDIA Tesla T4 GPU at no cost. The model’s code, data, and outputs are stored on Google Drive for easy access and sharing.
+
+\subsubsection{Platform and Resources}
+\begin{itemize}
+    \item \textbf{Platform}: The development environment is Google Colab, a cloud-based platform offering free GPU resources.
+    \item \textbf{Hardware}: The provided NVIDIA Tesla T4 GPU meets the project’s computational requirements.
+    \item \textbf{Storage}: Audio files and generated mel spectrograms are stored on Google Drive, allowing for easy file sharing and collaborative work.
+\end{itemize}
+
+\subsubsection{Programming Language}
+\textbf{Python} is used as the primary programming language due to its versatility and widespread adoption in machine learning. Python offers extensive libraries, making it highly suitable for one-time preprocessing tasks and deep learning model development. For this project:
+\begin{itemize}
+    \item The initial codebase was based on an existing audio anomaly detection notebook, which can be accessed at the following link: \href{https://colab.research.google.com/github/gefleury/datascientest_anomalous_sounds/blob/main/notebooks/ASD_clf_sounds_DL_from_machine_clf.ipynb#scrollTo=Wl7ZFXd3igl3}{Audio Anomaly Detection Notebook}.
+    \item The framework was modified from \texttt{Keras} to \texttt{PyTorch} for compatibility with modern practices, as \texttt{PyTorch} has become more prevalent in the AI research community and the AI developer is more familiar with  \texttt{PyTorch}.
+\end{itemize}
+
+\subsubsection{Software Versions}
+To ensure compatibility and reproducibility, the following versions are used in this project:
+\begin{itemize}
+    \item \textbf{Python}: 3.10 (Colab default)
+    \item \textbf{CUDA}: 12.2 (for GPU acceleration)
+    \item \textbf{Torch}: 2.5.0+cu121
+    \item \textbf{Torchaudio}: 2.5.0+cu121
+\end{itemize}
+
+\subsection{Model Deployment}
+The deployment of the AI model for anomaly sound detection is planned to be executed on Amazon Web Services (AWS) using a serverless approach. This strategy uses AWS Lambda and API Gateway to host the model, ensuring scalability, cost efficiency, and minimal infrastructure management. By utilizing Lambda, the model is loaded and served on-demand, allowing for quick responses to inference requests without the need for a continuously running server. This approach is chosen over AWS SageMaker because SageMaker introduces significant overhead and is primarily designed for high-throughput or continuous workloads. Given the relatively low frequency of model calls, SageMaker would add unnecessary complexity and pose a risk of escalating costs due to the complexity.
+
+\subsubsection{Platform and Resources} 
+\begin{itemize} 
+    \item \textbf{Platform}: The deployment environment will be AWS Lambda, using a custom Docker container to package the model and all necessary dependencies.
+    \item \textbf{Containerization with Docker}: The model and dependencies (PyTorch, NumPy, etc.) are packaged into a Docker container image, ensuring consistent runtime behavior. This container allows AWS Lambda to execute the model with all required libraries, avoiding compatibility issues.
+    \item \textbf{Hardware}: AWS Lambda functions dynamically allocate resources based on workload requirements. For this project, a CPU-based instance is sufficient given the expected low call frequency, reducing both cost and complexity.
+    \item \textbf{Model Format}: The model is saved in .pt format (PyTorch model format), compatible with the Lambda function configured to use PyTorch libraries within the Docker container.
+\end{itemize}
+
+\subsubsection{Programming Language and Environment} 
+The deployed model will continue to use Python as the programming language, given its compatibility with PyTorch and widespread support in AWS Lambda. 
+
+\subsubsection{Software Versions and Dependencies in Docker} 
+The Docker container provides a consistent environment for the Lambda function, ensuring compatibility and reproducibility: 
+\begin{itemize} 
+    \item Base Image: public.ecr.aws/lambda/python:3.8 (AWS Lambda Python 3.8 base image).
+    \item Dependencies: The Dockerfile includes the installation of PyTorch, NumPy, and other required libraries.
+    \item Python Version: 3.8, as provided by the AWS Lambda base image.
+    \item Torch and Torchaudio Versions: Compatible versions are specified in the Dockerfile to ensure consistency with the .pt model format.
+\end{itemize}
+
+\section{Cost Estimation}
+\subsection{AI Model Development}
+This project utilizes free resources provided by Google Colab and Google Drive:
+\begin{itemize}
+    \item \textbf{Software Cost}: Free, as Google Colab and Google Drive offer no-cost access for the project’s requirements.
+    \item \textbf{Hardware Cost}: None, as the Tesla T4 GPU is provided within Google Colab’s free tier.
+\end{itemize}
+
+\subsection{AI Model Deployment} 
+For this serverless deployment, AWS charges are based on the compute time used per request in Lambda and the request volume handled by API Gateway: 
+\begin{itemize} 
+    \item AWS Lambda with Docker: The cost is based on compute time (measured in milliseconds) per request. Given the lightweight nature of the model and expected low frequency of a few calls per day, Lambda expenses are anticipated to be minimal, approximately 0.50–1 Dollar per month. 
+    \item API Gateway: This service charges per million requests. With a low request frequency, monthly costs for API Gateway are expected to be negligible, estimated at around 0.10–0.50 Dollar per month. 
+    \item Total Cost: The combined costs for AWS Lambda and API Gateway for a few daily calls are estimated at approximately 0.60–1.50 Dollar per month. 
+\end{itemize}
+
+\section{Implementation and Integration}
+\subsection{Login System}
+The login system allows users to securely access their accounts using their email and password. Users can also opt for a password recovery mechanism through email verification. Spring Boot handles back-end processes, including password encryption using SHA-256 and validation against the database. Vue.js ensures the front-end provides an intuitive and seamless experience for users, with error handling and clear feedback messages on incorrect login attempts or successful authentication.
+
+\subsection{Administrator Back-office}
+Administrators can manage user accounts and feedback tickets through a dedicated back-office interface. The back-office allows viewing, sorting, and filtering user accounts and ticket status. This module leverages Spring Boot for back-end operations and Vue.js for front-end management tools.
+
+\subsection{User Dashboard}
+The dashboard gives users access to view historical alerts, manage personal information, and configure system settings. It features filters to sort alerts by type and date, allowing users to analyze past events. The front-end, developed with Vue.js, ensures responsive design across devices. Spring Boot manages the back-end, ensuring secure communication and data retrieval from the database.
+
+\subsection{Feedback tickets sending}
+A specific interface allows users to send feedback to the administrators through tickets. This interface would have some basic text editing features such as italic font, bold font, etc. This interface is made with Vue.js. On server side, this feature needs a few API end-points (to create and delete) and a table in the database.
+
+\subsection{Alerts and Notifications}
+The system provides multi-channel notifications through push notifications and emails when abnormal sounds are detected. Vue.js powers the user interface where users can configure alert preferences. Spring Boot manages the back-end operations for sending alerts and handling the escalation process in case of unacknowledged alerts.
+
+\subsection{Real-time Sound Monitoring}
+ The back-end, built using Spring Boot, communicates with the machine learning models, which detect abnormal sounds such as breaking glass, loud noises, or sudden silence. Python models, integrated through APIs, perform sound analysis and anomaly detection, ensuring efficient real-time monitoring.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{database.png}
+    \caption{Database structure}
+    \label{fig:database}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{uml.png}
+    \caption{UML Diagram}
+    \label{fig:uml}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{architecture.png}
+    \caption{System Architecture}
+    \label{fig:system_architecture}
+\end{figure}
+
+\subsection{Machine Learning Integration}
+Machine learning models play a vital role in anomaly detection. Supervised models identify patterns based on pre-labeled audio data, while unsupervised learning models recognize new and unusual sounds by learning typical household environments. These models are trained using Python and integrated into the system via APIs provided by the Spring Boot back-end.
+
+\subsection{Database Management}
+The system uses PostgreSQL to store user information, alert history, and sound data. Spring Boot handles database communication, ensuring data integrity and security. User profiles, system alerts, and other data are stored relationally, facilitating efficient querying and data retrieval. Regular backups and encryption protocols ensure data safety and compliance with privacy policies.
+
+\subsection{Data Implementation Process}
+This section details the step-by-step implementation of the audio preprocessing.
+
+\subsubsection{Audio Data Collection and Duration Normalization}
+The audio data preprocessing begins with loading WAV files from a designated directory. The audio files are processed to ensure each file meets the required duration of exactly 5 seconds. If a file is shorter than 5 seconds, additional audio files are concatenated to reach the duration limit.
+
+\begin{itemize}
+    \item \textbf{Identify WAV files}: List all WAV files in the target directory, excluding specified subfolders.
+    \item \textbf{Calculate Duration}: For each audio file, calculate the duration in seconds to determine if it meets the 5-second requirement.
+    \item \textbf{Combine and Trim Audio Files}:
+        \begin{itemize}
+            \item Concatenate audio files until the total duration is at least 5 seconds.
+            \item Trim the combined audio to exactly 5 seconds if it exceeds the limit.
+            \item Save the trimmed file in a separate output directory, preserving folder structure.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Mel Spectrogram Generation}
+Each trimmed audio file is converted into a mel spectrogram, which provides a time-frequency representation of the sound.
+
+\begin{itemize}
+    \item \textbf{Load Audio Files}: Load each WAV file from the output directory created in the previous step.
+    \item \textbf{Convert to Mel Spectrogram}:
+        \begin{itemize}
+            \item Use a set of predefined parameters, such as FFT size, hop length, and number of mel bands, to create a standardized mel spectrogram.
+            \item Convert the spectrogram to decibel scale to enhance feature visibility.
+        \end{itemize}
+    \item \textbf{Padding and Trimming}: If the mel spectrogram has fewer frames than expected for a 5-second clip, pad it with zeros. If it exceeds the expected frame count, trim the excess frames to maintain uniform input dimensions.
+    \item \textbf{Save as .npy Files}: Save each spectrogram as an \texttt{.npy} file in a structured directory to facilitate easy access during training.
+\end{itemize}
+
+\section{AI Implementation Process}
+The following section describes the main stages involved in implementing the AI model for audio anomaly detection under the development environment on Google Colab with Python and PyTorch.
+
+\subsection{Data Preparation and Loading}
+\begin{itemize}
+    \item \textbf{Data Collection}: The mel spectrograms for the audio files are stored in Google Drive and are structured into folders based on the type of sound (e.g., normal or anomaly).
+    \item \textbf{Dataframe Creation}: A function is used to load the mel spectrograms and create a structured dataframe, labeling each entry based on sound type and directory (train or test). The data is split so that 15\% of samples are used for testing, and the rest are used for training.
+\end{itemize}
+
+\subsection{Data Generator}
+The data generator function is responsible for loading data in batches during training and validation:
+\begin{itemize}
+    \item \textbf{Shuffling and Batch Creation}: To avoid overfitting and ensure variety, data is shuffled and loaded in small batches. Each batch contains both the mel spectrograms and their corresponding labels.
+    \item \textbf{One-Hot Encoding of Labels}: Labels are converted to a one-hot encoded format to support multi-class classification.
+\end{itemize}
+
+\subsection{Model Architecture (CNN with Regularization)}
+The model is implemented as a Convolutional Neural Network (CNN) with regularization techniques such as dropout and batch normalization to improve generalization. The main components are:
+\begin{itemize}
+    \item \textbf{Convolutional Layers}: Extract spatial features from the mel spectrograms. Each convolutional layer is followed by batch normalization and pooling.
+    \item \textbf{Fully Connected Layer with Dropout}: After flattening, a fully connected layer with dropout is used for additional regularization.
+    \item \textbf{Output Layer}: A softmax activation function is applied in the final layer to classify sounds into six categories.
+\end{itemize}
+
+\subsection{Training and Validation Loop}
+The training function, \texttt{fit\_and\_predict\_model}, manages the training and validation of the model:
+\begin{itemize}
+    \item \textbf{Data Splitting}: The function divides the data into training and validation sets, using 80\% for training and 20\% for validation within the training dataset.
+    \item \textbf{Loss Function and Optimization}: The model is trained using Cross-Entropy Loss for multi-class classification, and the optimizer is Adam with L2 regularization.
+    \item \textbf{Training Epochs and Early Stopping}: The model is trained over multiple epochs, and early stopping is used to prevent overfitting by monitoring validation loss.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Model.png}
+    \caption{Training and Validation Accuracy and Loss Over Epochs}
+    \label{fig:loss_plot}
+\end{figure}
+
+\subsection{Model Evaluation}
+\begin{table}[h!]
+    \centering
+    \caption{Classification Report for Machine Learning Model on Various Audio Categories}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\
+        \hline
+        ChildrenPlay & 1.00 & 1.00 & 1.00 & 29 \\
+        Accidents & 0.00 & 0.00 & 0.00 & 1 \\
+        Car Crash & 0.80 & 1.00 & 0.89 & 4 \\
+        Conversation & 1.00 & 1.00 & 1.00 & 2 \\
+        Gun Shot & 0.90 & 1.00 & 0.95 & 9 \\
+        Scream & 1.00 & 0.83 & 0.91 & 6 \\
+        \hline
+        Accuracy & \multicolumn{3}{c|}{0.96} & 51 \\
+        \hline
+        Macro Avg & 0.78 & 0.81 & 0.79 & 51 \\
+        Weighted Avg & 0.95 & 0.96 & 0.95 & 51 \\
+        \hline
+    \end{tabular}
+    \label{tab:classification_report}
+\end{table}
+
+\noindent
+\textbf{Explanation of Terms:}
+\begin{itemize}
+    \item \textbf{Macro Average}: The macro average calculates precision, recall, and F1-score for each class independently and then takes their unweighted mean. This gives equal importance to each class, which can highlight performance on underrepresented classes.
+    \item \textbf{Weighted Average}: The weighted average calculates metrics for each class and then takes their average, weighted by the number of samples (support) in each class. This provides a more accurate overall metric when there is class imbalance.
+    \item \textbf{Support}: Support represents the number of true instances for each class in the dataset. It shows the distribution of data across different categories and helps in understanding how prevalent each class is in the evaluation.
+\end{itemize}
+
+\end{document}
