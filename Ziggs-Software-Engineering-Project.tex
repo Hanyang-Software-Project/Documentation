@@ -15,7 +15,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot[R]{\thepage}
+\fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -23,33 +23,33 @@
 \begin{document}
 
 \title{ZIGGS - Anomaly Detection at Home Based on Sound Systems}
-\author{
-\IEEEauthorblockN{1\textsuperscript{st} Jan Imhof}
-\IEEEauthorblockA{\textit{Computer Science Dep.} \\
-\textit{Karlsruhe Institute of Technology}\\
-Karlsruhe, Germany \\
-uwxdb@student.kit.edu}
-\and
-\IEEEauthorblockN{2\textsuperscript{nd} Ivan Milosavljevic}
-\IEEEauthorblockA{\textit{Computer Science Dep.} \\
-\textit{Institut Supérieur d'Éléctronique de Paris}\\
-Boulogne-Billancourt, France \\
-ivmi61663@eleve.isep.fr}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Nicolas Busquet}
-\IEEEauthorblockA{\textit{Computer Science Dep.} \\
-\textit{L'École d'Informatique en Alternance}\\
-Nanterre, France \\
-nrb.busquet@gmail.com}
-\and
-% Centered fourth author
-\IEEEauthorblockN{\hspace{7.1cm}4\textsuperscript{th} Adrian Obermuehlner}
-\IEEEauthorblockA{\hspace{7.1cm}\textit{Computer Science Dep.} \\
-\hspace{7.1cm}\textit{ZHAW Zurich Unversity of Applied Sciences}\\
-\hspace{7.1cm}Zurich, Switzerland \\
-\hspace{7.1cm}aobermuhlner@gmail.com}
-}
 
+\author{ 
+\IEEEauthorblockN{Jan Imhof} 
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\ 
+\textit{Karlsruhe Institute of Technology}\\ 
+Karlsruhe, Germany \\ 
+uwxdb@student.kit.edu}
+\and 
+\IEEEauthorblockN{Ivan Milosavljevic} 
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\ 
+\textit{ISEP School of Electronics}\\ 
+Boulogne-Billancourt, France \\ 
+ivmi61663@eleve.isep.fr}
+\and 
+\IEEEauthorblockN{Nicolas Busquet} 
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\ 
+\textit{ESGI School of CS}\\ 
+Nanterre, France \\ 
+nrb.busquet@gmail.com}
+\and 
+\IEEEauthorblockN{Adrian Obermuehlner} 
+\IEEEauthorblockA{\textit{Computer Science Dep.} \\ 
+\textit{ZHAW Zurich University}\\ 
+Zurich, Switzerland \\ 
+aobermuhlner@gmail.com}
+}
+\maketitle
 
 
 
@@ -88,13 +88,13 @@ Our solution addresses this by using machine learning and IoT devices to continu
         \hline
         \textbf{Role} & \textbf{Name} & \textbf{Task Description} \\
         \hline
-        AI Developer & Adrian Samuel & Specializes in designing and optimizing machine learning algorithms to identify abnormal sounds in a home environment. Responsible for training the model using diverse audio data, allowing it to recognize and adapt to different household sound profiles, such as elderly distress calls, child-related noises, or pet disturbances. Ensures continuous learning from new data, refining accuracy and effectiveness in detecting potential emergencies. \\
+        AI Developer & Jan Imhof & Specializes in designing and optimizing machine learning algorithms to identify abnormal sounds in a home environment. Responsible for training the model using diverse audio data, allowing it to recognize and adapt to different household sound profiles, such as elderly distress calls, child-related noises, or pet disturbances. Ensures continuous learning from new data, refining accuracy and effectiveness in detecting potential emergencies. \\
         \hline
-        back-end Developer & Ivan Milosavljevic & Responsible for the development and integration of the back-end architecture that connects LG’s IoT devices with the acoustic monitoring system. This includes managing the database to store audio data, implementing security protocols for user authentication, and building APIs for smooth data transmission and real-time alerts. Oversees scalability to handle continuous audio streams and machine learning updates. \\
+        Back-end Developer & Ivan Milosavljevic & Responsible for the development and integration of the back-end architecture that connects LG’s IoT devices with the acoustic monitoring system. This includes managing the database to store audio data, implementing security protocols for user authentication, and building APIs for smooth data transmission and real-time alerts. Oversees scalability to handle continuous audio streams and machine learning updates. \\
         \hline
-        front-end Developer & Jan Imhof & Focuses on designing and developing the user interface (UI) and user experience (UX) for the mobile and web platforms that enable users to monitor sound-based events in their homes. Ensures seamless interaction between users and the system, including configuring alerts and viewing real-time audio analysis. Key tasks include testing, debugging, and refining the interface for ease of use across various devices. \\
+        Front-end Developer & Adrian Samuel & Focuses on designing and developing the user interface (UI) and user experience (UX) for the mobile and web platforms that enable users to monitor sound-based events in their homes. Ensures seamless interaction between users and the system, including configuring alerts and viewing real-time audio analysis. Key tasks include testing, debugging, and refining the interface for ease of use across various devices. \\
         \hline
-        front-end Developer & Nicolas Busquet & Oversees the visual design and interaction elements of the user-facing components, ensuring that users receive notifications and alerts in a visually engaging and intuitive manner. Works with tools like Figma to create clean, responsive designs that facilitate quick responses to detected abnormalities, tailored for users with specific needs such as elderly care or pet monitoring. \\
+        Front-end Developer & Nicolas Busquet & Oversees the visual design and interaction elements of the user-facing components, ensuring that users receive notifications and alerts in a visually engaging and intuitive manner. Works with tools like Figma to create clean, responsive designs that facilitate quick responses to detected abnormalities, tailored for users with specific needs such as elderly care or pet monitoring. \\
         \hline
     \end{tabular}
     \end{adjustbox}
@@ -386,26 +386,6 @@ The system provides multi-channel notifications through push notifications and e
 \subsection{Real-time Sound Monitoring}
  The back-end, built using Spring Boot, communicates with the machine learning models, which detect abnormal sounds such as breaking glass, loud noises, or sudden silence. Python models, integrated through APIs, perform sound analysis and anomaly detection, ensuring efficient real-time monitoring.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{database.png}
-    \caption{Database structure}
-    \label{fig:database}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{uml.png}
-    \caption{UML Diagram}
-    \label{fig:uml}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{architecture.png}
-    \caption{System Architecture}
-    \label{fig:system_architecture}
-\end{figure}
 
 \subsection{Machine Learning Integration}
 Machine learning models play a vital role in anomaly detection. Supervised models identify patterns based on pre-labeled audio data, while unsupervised learning models recognize new and unusual sounds by learning typical household environments. These models are trained using Python and integrated into the system via APIs provided by the Spring Boot back-end.
@@ -445,6 +425,7 @@ Each trimmed audio file is converted into a mel spectrogram, which provides a ti
 \end{itemize}
 
 \section{AI Implementation Process}
+\label{AI Impls}
 The following section describes the main stages involved in implementing the AI model for audio anomaly detection under the development environment on Google Colab with Python and PyTorch.
 
 \subsection{Data Preparation and Loading}
@@ -512,7 +493,514 @@ The training function, \texttt{fit\_and\_predict\_model}, manages the training a
 \begin{itemize}
     \item \textbf{Macro Average}: The macro average calculates precision, recall, and F1-score for each class independently and then takes their unweighted mean. This gives equal importance to each class, which can highlight performance on underrepresented classes.
     \item \textbf{Weighted Average}: The weighted average calculates metrics for each class and then takes their average, weighted by the number of samples (support) in each class. This provides a more accurate overall metric when there is class imbalance.
-    \item \textbf{Support}: Support represents the number of true instances for each class in the dataset. It shows the distribution of data across different categories and helps in understanding how prevalent each class is in the evaluation.
+    \item \textbf{Support}: Support represents the number of true instances for each class in the dataset. It shows the distribution of data across different categories and helps in understanding how prevalent each class is in the evaluation.    
 \end{itemize}
 
+\section{Architecture Design and Implementation}
+
+\subsection{Overall architecture}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{ziggsDB.png}
+    \caption{Database structure}
+    \label{fig:database}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{architecture.png}
+    \caption{System Architecture}
+    \label{fig:system_architecture}
+\end{figure}
+
+\section{Modules Overview}
+
+\subsection{Directory organization Backend}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|m{2.6cm}|m{3.5cm}|m{1.6cm}|}
+\hline
+\textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ controller & 
+AlertController.java \newline 
+AuthController.java \newline 
+FeedbackTicketController.java \newline 
+HouseController.java \newline
+NotificationController.java \newline 
+SecureController.java \newline 
+SoundDataController.java \newline 
+UserController.java & 
+Controller \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ service & 
+AlertService.java \newline 
+FeedbackTicketService.java \newline 
+HouseService.java \newline 
+NotificationService.java \newline 
+SoundDataService.java\newline 
+UserService.java & 
+Service \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ repository & 
+AlertRepository.java \newline 
+FeedbackTicketRepository.java \newline 
+HouseRepository.java \newline 
+NotificationRepository.java \newline 
+SoundDataRepository.java \newline 
+UserRepository.java  & 
+Repository \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ entity & 
+Alert.java \newline 
+FeedbackTicket.java \newline 
+House.java \newline
+Notification.java \newline 
+SoundData.java \newline
+User.java & 
+Entity \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ dto & 
+LoginRequestDTO.java \newline 
+UserDTO.java \newline 
+UserId.java
+& 
+DTO \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ config & 
+FirebaseConfig.java \newline 
+WebConfig.java & 
+Configuration \\ \hline
+
+Ziggs\_Backend/ src/main/resources & 
+application.properties \newline 
+application.properties.example \newline 
+ziggs-7421a-firebase-adminsdk-2ivcm-8b8925d87b.json & 
+Resources \\ \hline
+
+Ziggs\_Backend & 
+Dockerfile & 
+Docker \\ \hline
+
+Ziggs\_Backend & 
+pom.xml & 
+Build \\ \hline
+
+\end{tabular}
+\caption{Directory Structure and Modules for Backend}
+\end{table}
+
+
+The application is divided into several modules, each with a specific role and responsibility to ensure clarity, modularity, and scalability.
+
+\vspace{0.5cm}
+
+\textbf{Controller:}  
+
+This module manages incoming HTTP requests and serves as the entry point for users to interact with the application. It defines endpoints for features such as authentication, notifications, user management, and feedback handling. Requests received by the controllers are passed to the appropriate service layer for processing. By decoupling request handling from business logic, it ensures clarity, modularity, and easier debugging.
+
+\vspace{0.5cm}
+
+\textbf{Service:}  
+
+This module contains the core business logic of the application. It processes data received from the controllers, applies business rules, and handles complex operations before interacting with the repositories for data storage or retrieval. For example, the AlertService validates incoming alerts before storing them, and the UserService manages user-related operations like registration and profile updates. This separation ensures maintainability, scalability, and flexibility for adapting to future requirements.
+
+\vspace{0.5cm}
+
+\textbf{Repository:}  
+
+The repository module handles data persistence and retrieval. It interfaces directly with the database using JPA/Hibernate, abstracting the complexity of database queries. Each repository corresponds to a specific entity, such as \texttt{UserRepository} for user data or \texttt{AlertRepository} for alerts, ensuring efficient data access and consistency. This design provides standardized and reusable methods for database operations.
+
+\vspace{0.5cm}
+
+\textbf{Entity:}  
+
+The entity module defines the application's data models. It maps Java objects to database tables using JPA annotations, providing a clear and structured way to represent data. Entities such as \texttt{User}, \texttt{Alert}, and \texttt{FeedbackTicket} define the schema and relationships between different data points. This abstraction ensures database interactions remain intuitive and aligned with the business logic.
+
+\vspace{0.5cm}
+
+\textbf{DTO (Data Transfer Object):}  
+
+This module structures data for specific use cases, such as API requests and responses. DTOs like \texttt{UserDTO} and \texttt{LoginRequestDTO} are used to simplify communication between layers by encapsulating only the required fields. They improve performance by reducing unnecessary data transfer and ensure consistent data formats across endpoints.
+
+\vspace{0.5cm}
+
+\textbf{Configuration:}  
+
+The configuration module manages external library integrations and application settings. It includes files like \texttt{FirebaseConfig} for setting up Firebase authentication and \texttt{WebConfig} for defining interceptors or CORS policies. This module ensures seamless scalability and easy customization of application behavior without altering the core logic.
+
+\vspace{0.5cm}
+
+\textbf{Resources:}  
+
+This directory contains essential configuration files required for the application to run properly. It includes \texttt{application.properties} for defining environment-specific settings (e.g., database connections) and Firebase credentials for integrating authentication services. These files centralize setup details and streamline environment configuration.
+
+\vspace{0.5cm}
+
+\textbf{Docker:}  
+
+The Docker module provides the steps necessary to containerize the application. The \texttt{Dockerfile} defines how the application is built and run in a Docker container, ensuring consistency across development, testing, and production environments. It simplifies deployment, allows better resource isolation, and enables scalability through container orchestration tools.
+
+\vspace{0.5cm}
+
+\textbf{Build:}  
+
+The \texttt{pom.xml} file defines the project's dependencies, plugins, and build structure. It ensures compatibility by managing library versions and provides an efficient way to build, test, and deploy the application. This file acts as the foundation for the Maven-based build process.
+
+\subsection{Directory organization Data and AI}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|m{2.6cm}|m{3.5cm}|m{1.6cm}|}
+\hline
+\textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
+
+AI\_Model/ & 
+Sound\_Preprocessing.ipynb \newline 
+Pytorch\_Supervised\_Model.ipynb & 
+Data Processing / Model Creation \\ \hline
+
+AWS\_Backend\_Model/ & 
+app.py \newline 
+app\_api.py \newline 
+model.py \newline 
+CNN\_RegDrop.pt & 
+S3 Monitoring and Model Execution / Legacy API \\ \hline
+
+AWS\_Backend\_Model/ & 
+dockerfile & 
+Deployment Configuration \\ \hline
+
+\end{tabular}
+\caption{Directory Structure and Modules for AI Workflow}
+\label{table:workflow_structure}
+\end{table}
+
+\subsubsection{Data Processing / Model}
+This module preprocesses audio data into mel spectrograms, trains a CNN model to classify audio anomalies, and evaluates the model's performance. Detailed explanations can be found in section \ref{AI Impls}.
+
+\textbf{Key Components}:
+\begin{itemize}
+    \item \textbf{Data Preparation}: Converts audio into mel spectrograms and structures datasets.
+    \item \textbf{CNN Architecture}: Implements convolutional layers, dropout, and batch normalization for classification.
+    \item \textbf{Training and Validation}: Trains the model with cross-entropy loss and evaluates metrics such as precision and accuracy.
+\end{itemize}
+
+\subsubsection{S3 Monitoring and Model Execution}
+This module automates anomaly detection by monitoring an S3 bucket for audio files, processing them with a CNN model, and sending notifications if anomalies are detected. 
+
+\textbf{Initial Design}: 
+Originally, an API Gateway with AWS Lambda was implemented to provide predictions via a \texttt{/predict} endpoint. This design worked well for individual requests, as shown in Figure~\ref{fig:postman_api}. However, maintaining multiple API endpoints across different backends is too complex for a system where data processing could be centralized.  
+
+\textbf{Current Design}: 
+The job-based system in \texttt{app.py} (Work in progress):
+\begin{itemize}
+    \item Monitors the \texttt{input-data/} folder in S3.
+    \item Processes files with a preloaded CNN model (\texttt{CNN\_RegDrop.pt}).
+    \item Sends notifications for anomalies and moves processed files to \texttt{processed-data/}.
+\end{itemize}
+
+\subsubsection{Dockerfile}
+This Dockerfile was created for the initial design where the AI model was deployed via an API gateway and AWS Lambda. It uses the AWS Lambda Python runtime base image and is optimized for small size by installing only the necessary dependencies such as PyTorch, Flask and \texttt{apig-wsgi}. 
+The application code (\texttt{app.py}, \texttt{model.py}) and the trained model (\texttt{CNN\_RegDrop.pt}) are included in the container. The resulting image is pushed to Amazon Elastic Container Registry (ECR) for deployment in AWS Lambda.
+
+\subsection{Directory Organization Front-End}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|m{2.6cm}|m{3.5cm}|m{1.6cm}|}
+\hline
+\textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
+
+Vue\_Frontend/src/  & 
+App.vue \newline
+main.js & 
+Initialization \\ \hline
+
+Vue\_Frontend/src/ router & 
+index.js \newline
+routes.js & 
+Routing \\ \hline
+
+Vue\_Frontend/src/ assets/ & 
+css/*.css \newline
+fonts/*.woff \newline
+fonts/*.woff2 \newline
+fonts/*.ttf \newline
+fonts/*.eot \newline
+fonts/*.svg \newline
+img/*.png \newline
+img/*.jpg \newline
+img/*.svg \newline
+img/*.gif \newline
+sass/*.scss & 
+Assets \\ \hline
+
+Vue\_Frontend/src/  components/ & 
+Button.vue \newline
+Dropdown.vue \newline
+FormCompenent.vue \newline
+LabelledInput.vue \newline
+ziggTable.vue \newline
+Inputs/formGroupInput.vue \newline
+index.js & 
+Vue Components \\ \hline
+
+Vue\_Frontend/src/ components/Cards & 
+Card.vue \newline
+ChartCard.vue \newline
+StatsCard.vue \newline
+TableCard.vue & 
+Card Vue Components \\ \hline
+
+Vue\_Frontend/src/ components/ SidebarPlugin & 
+SidebarLink.vue \newline
+SideBar.vue \newline
+MovingArrow.vue \newline
+index.js & 
+Sidebar Vue Components \\ \hline
+
+Vue\_Frontend/src/ layout & 
+AlarmTab.vue \newline
+FooterComponent.vue \newline
+GlobalyLayout.vue \newline
+HeaderComponent.vue & 
+Layouts \\ \hline
+
+Vue\_Frontend/src/ layout/dashboard & 
+Content.vue \newline
+ContentFooter.vue \newline
+DashboardLayout.vue \newline
+MobileMenu.vue \newline
+TopNavbar.js & 
+Dashboard Layout \\ \hline
+
+Vue\_Frontend/src/ pages & 
+Dashboard.vue \newline
+Maps.vue \newline
+NotFoundPage.vue \newline
+Notificiations.vue \newline
+TableList.vue \newline
+Typography.vue \newline
+UserProfile.vue  \newline
+Notifications/ NotificationTemplate.vue &
+Pages \\ \hline
+
+Vue\_Frontend/src/ pages/UserProfile & 
+components/edit-household-modal.vue \newline
+components/edit-modal.vue \newline
+components/invite-modal.vue \newline
+EditProfileForm.vue \newline
+HouseCard.vue \newline
+UserCard.vue & 
+User Profile Components \\ \hline
+
+Vue\_Frontend/src/ plugins & 
+globalComponents.js \newline
+ziggDashboard.js \newline
+globalDirectives.js & 
+Plugins \\ \hline
+
+\end{tabular}
+\caption{Directory Structure and Modules for Front-end}
+\end{table}
+
+\vspace{0.5cm}
+
+\textbf{Initialization:}
+
+This module is in charge of the initialization of the whole project. It loads the dashboard with Vue and activate the routing part.
+
+\vspace{0.5cm}
+
+\textbf{Routing:}
+
+The routing files create an instance of the Router class and save all the routes (URIs) of our project. It links the routes with the wanted components. The routing is essential to allow the website to have multiple pages.
+
+\vspace{0.5cm}
+
+\textbf{Assets:}
+
+The Assets section is used for no code files such as style sheets and images. The files of the Assets folder are not fixed and may be deleted or created during its lifetime.
+
+\vspace{0.5cm}
+
+\textbf{Vue Components:}
+
+Vue.JS works with components, which are pieces of HTML/CSS and a script language you can implement with other components to create pages. This module Vue Components contains the components used in our pages. Some components use other components to work, these components are grouped in sub-folders.
+
+\vspace{0.5cm}
+
+\textbf{Card Vue Components:}
+
+This section is about the sub-folder "Cards" of the Components module. It contains different kind of Cards components and it is where new Cards components should be stored.
+
+\vspace{0.5cm}
+
+\textbf{Side Bar Vue Components:}
+
+This section is about the sub-folder "SidebarPlugin" of the Components module. It contains the Sidebar component and its sub-components as well.
+
+\vspace{0.5cm}
+
+\textbf{Layouts:}
+
+This module gathers the Layouts components. A layout is a component which defines the position of elements. A layout can be used for different pages. This module can contain sub-folders for layouts which need specific components. These sub-folders contain the layout and its components.
+
+\vspace{0.5cm}
+
+\textbf{Dashboard Layout:}
+
+This sub-folder of the Layouts module is meant to store the Dashboard component and its sub-components.
+
+\vspace{0.5cm}
+
+\textbf{Pages:}
+
+This Pages module contain the pages components of the project. These components may use or complete a layout with more specific information. Pages components are basically the components that are displayed to the user. Some pages may use its own components, in this case the page and its components can be put in the same folder.
+
+\vspace{1cm}
+
+\textbf{User Profile Components:}
+
+This sub-folder of the Pages module stores the User Profile page and its sub-components in a folder.
+
+\vspace{0.5cm}
+
+\textbf{Plugins:}  
+
+The Plugins module is used to import external libraries and globalize their components to the whole project.
+
+
+
+\textbf{Modules:}  
+
+\textbf{Login/Create Account Page}
+
+This module handles user authentication and account creation using [specify technology or framework, e.g., Firebase, OAuth]. It supports multiple authentication methods, including email/password and social media logins. Upon successful login or account creation, the user is redirected to the dashboard. User session management is implemented to maintain login states across visits. The authentication process is asynchronous, with progress animations to enhance the user experience during the wait.
+\vspace{0.5cm}
+
+\textbf{Household Management Page}
+
+On the Household Management page, users can add and manage household members. This feature allows users to define roles and permissions for each member concerning device access and data visibility. The interface provides forms to input member information and uses [technology or method, e.g., AJAX calls] to submit this data to the server. Changes are updated in real-time using [state management technique, e.g., Redux or Context API], ensuring all household data across the platform remains synchronized.
+\vspace{0.5cm}
+
+\textbf{Devices Page}
+
+The Devices page enables users to register and manage devices equipped with microphones. It includes a form to enter device details and a mechanism to connect these devices to the user’s network. Each device sends audio data to the backend for processing. The page provides real-time feedback on the device’s status, such as connectivity and recording state, and uses asynchronous requests to handle registration and updates without page reloads.
+\vspace{0.5cm}
+
+\textbf{Dashboard Page}
+
+The Dashboard serves as a central hub for users to get an overview of their household and device settings. It displays aggregate data from all connected devices, including audio monitoring status and event logs. The dashboard updates dynamically, reflecting changes in real-time through web sockets or polling mechanisms. Widgets and graphical representations (charts, graphs) provide a user-friendly interface to monitor household activities and device statuses.
+\vspace{0.5cm}
+
+\textbf{Popup Alerts}
+
+Popup alerts are implemented across all pages to notify the user of any detected abnormalities by the AI in the backend. These alerts are triggered in real-time and are designed to catch the user’s attention without disrupting ongoing tasks. The alerts provide concise information about the nature of the abnormality and prompt the user for immediate actions if necessary. Integration with the backend AI uses [specific technologies, protocols], ensuring timely and relevant notifications.
+\vspace{0.5cm}
+
+\textbf{Backend Integration and AI Processing}
+
+This module describes the interaction between the frontend and the AI algorithms running on the server. The backend receives audio data from devices, processes it using machine learning models to detect abnormalities, and sends alerts back to the frontend. API endpoints are designed for efficient data transmission and security. Details include the use of RESTful services or real-time communication protocols like WebSockets for continuous data flow.
+
+\section{Use Cases}
+
+\subsection{Backend}
+
+The following examples illustrate some use cases for endpoints within the web application. These are just a few among many others, meant to demonstrate how various functionalities are integrated into the system to handle different types of user requests.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{post_use_case.png}
+    \caption{Use Case 2: Endpoint for creating a user. The user enters his information such as username, password, address... The user information is then stored into our relational database.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{get_use_case.png}
+    \caption{Use Case 1: Endpoint for retrieving user profile data. This endpoint allows the web app to fetch detailed information about a user, such as their name, email...}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{token_use_case.png}
+    \caption{Use Case 3: Endpoint for user login. Upon successful login, the system generates a custom token that grants access to restricted endpoints based on the user's role, while also maintaining the session.}
+\end{figure}
+
+
+These use cases represent just a fraction of the possible interactions within the application, each designed to handle specific tasks and improve user experience through seamless API communication.
+
+\subsection{AI Model Backend}
+
+Figure \ref{fig:postman_api} illustrates the use of an API endpoint for anomaly detection in audio data. A POST request is sent to the endpoint hosted on AWS API Gateway, which provides audio input data in JSON format. 
+
+The API processes the input using the provided AI model and returns the following response
+\begin{itemize}
+    \item \textbf{Anomaly Score}: A numeric value indicating the probability that the input is anomalous.
+    \item \textbf{Predicted Class}: The classification result, where 0 means that no anomaly was detected.
+    \item \textbf{Predicted Probability}: The confidence value for the predicted class.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{API Model.png}
+    \caption{Postman Test of API Gateway Design}
+    \label{fig:postman_api}
+\end{figure}
+
+Figure \ref{fig:s3} shows the \texttt{input-data/} folder in an Amazon S3 bucket. This folder is continuously monitored by the new job-based approach implemented in \texttt{app.py}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{s3.png}
+    \caption{S3 Bucket that is being monitored}
+    \label{fig:s3}
+\end{figure}
+
+\subsection{Front-End}
+
+Figure \ref{fig:user_dashboard} shows the user dashboard.
+To access this page, the user just need to login. It is composed of a side menu, the main part and a header. By default, the main part displays the last alerts and notifications. The user can navigate through the dashboard with the side menu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{user_dashboard_use_case.png}
+    \caption{The user dashboard main page}
+    \label{fig:user_dashboard}
+\end{figure}
+
+Figure \ref{fig:household} shows the household section during editing.
+To access the household page of the dashboard, the user has to click on the "Household" button in the side menu. At this point, the user can see the household members and information. The "Edit Profile" button will open the modal you can see on the screenshot.
+When the form is completed and submitted, the household information are updated.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{edit_household_use_case.png}
+    \caption{Editing household's information}
+    \label{fig:household}
+\end{figure}
+
+Figure \ref{fig:devices} shows the "Devices" section of the dashboard.
+This section can be accessed by clicking on the "Devices" button on the side menu. From this page users are able to add new devices linked to their household or remove the existing devices.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{devices_page_use_case.png}
+    \caption{Devices dashboard}
+    \label{fig:devices}
+\end{figure}
+
+
+
 \end{document}
+
+
+
+
+
