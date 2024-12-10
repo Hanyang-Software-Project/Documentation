@@ -22,7 +22,7 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{ZIGGS - Anomaly Detection at Home Based on Sound Systems}
+\title{ZIGGS - Sound detection in households}
 
 \author{ 
 \IEEEauthorblockN{Jan Imhof} 
@@ -119,11 +119,6 @@ Our solution addresses this by using machine learning and IoT devices to continu
     \item \textbf{Personal Information:} Users are required to provide their first and last names, phone number, emergency phone number, and postal address. This information helps ensure that in the case of an alert that isn’t acknowledged promptly, emergency contacts can be reached.
 \end{itemize}
 
-\textbf{Email Validation:}
-\begin{itemize}
-    \item After users complete the registration form, a verification code is sent to the provided email address.
-    \item The user must enter this code to confirm their email before completing the registration. This ensures the email is valid and accessible by the user.
-\end{itemize}
 
 \textbf{Redirection:}
 \begin{itemize}
@@ -139,29 +134,11 @@ Our solution addresses this by using machine learning and IoT devices to continu
     \item \textbf{Password:} The user’s password is required for authentication. The system verifies the encrypted password stored in the database.
 \end{itemize}
 
-\textbf{Password Recovery:}
-\begin{itemize}
-    \item If a user forgets their password, they can request a password reset link via email.
-    \item A code or link is sent to their registered email, allowing them to set a new password following the same security requirements.
-\end{itemize}
 
 \subsubsection{Administrator Back-office}
-The website is maintained by admin users. These admin users have access to the back-office part of the website from where they can manage the different items of it (e.g. user accounts, feedback tickets...)
+The website is maintained by admin users. These admin users have access to the back-office part of the website from where they can manage the different items of it.
 
-\textbf{User accounts management}
-\begin{itemize}
-    \item \textbf{Display users:} The administrator have access to a screen which display all the users account created. It displays the information of each user except the confidential ones. The accounts can be sorted by name (alphabetical) or date of creation or of birth. It is also possible to search a user from a search bar.
-    \item \textbf{Delete users:} The administrator has the right to delete a user account. It should be used only follow on from a user request.
-    \item \textbf{Manage user password:} The administrator is able to send an email for resetting the password of a user. 
-    \item The administrator is able to block the access to the feedback ticket system to a user. It is necessary in case of spamming, flooding or disrespect from a user.
-\end{itemize}
 
-\textbf{Feedback tickets management}
-\begin{itemize}
-    \item \textbf{Display tickets:} The administrator have access to a screen which display all the feedback tickets sent by the users. The tickets can be sorted by date or alphabetical order. They can also be filtered by user, date or status. It's possible to open the ticket page by clicking on it.
-    \item \textbf{Answer tickets:} The administrator can answer a ticket from its page. While answering, it is possible to change the ticket status. When a ticket is answered, its author is notified by email.
-    \item \textbf{Ticket status:} A ticket can have 4 different status. When received, the status is set to \textit{unread} by default. On the ticket page, the administrator can change the status to \textit{in process}, \textit{solved} or \textit{cancelled}. The \textit{cancelled} status is made for tickets which are not requests or not conform to ethics.
-\end{itemize}
 
 \subsection{User Dashboard}
 Once logged in, users have access to a personalized dashboard where they can monitor alerts, manage their account information, and interact with the system.
@@ -173,28 +150,14 @@ Once logged in, users have access to a personalized dashboard where they can mon
     \item Users can click on any alert to see more details, such as the audio snippet that triggered the alert, and provide feedback if the alert was accurate or a false positive.
 \end{itemize}
 
-\textbf{Account Management:}
-\begin{itemize}
-    \item Users can update their personal details, such as their email, phone numbers, or postal address, directly from their profile settings.
-    \item Users have the option to change their password or update their emergency contacts as needed.
-    \item \textbf{Account Deletion:} Users can request to delete their account permanently. This action will remove all personal information, alert history, and preferences from the system. A confirmation step is included to prevent accidental deletions.
-\end{itemize}
 
-\subsection{Feedback Ticket System}
-\begin{itemize}
-    \item Users can send feedback tickets to the administrator from a specific page. There are 2 kinds of tickets : \textit{bug reports} or \textit{general request}.
-    \item When submitting a ticket, users can provide a brief description of the issue, attach screenshots if necessary, and specify the time when the issue occurred if there's one.
-    \item General requests are tickets which are not related to a technical issue. For example, a request for deleting the account or an idea to improve the website.
-\end{itemize}
 
-\subsection{Alerts and Notifications}
-\textbf{Mobile Notifications:} Alerts are sent directly to the user’s smartphone via push notifications. These alerts include a brief description of the detected anomaly (e.g., "Loud crash detected in the living room") and the time of occurrence. A link to view or listen to a recorded snippet of the audio is also included, enabling users to assess the situation quickly.
+\subsection{Alerts}
 
-\textbf{Email Alerts:} For users who may not have access to their mobile app at all times, email notifications are sent. These emails contain details of the anomaly and a link to access the user portal for further investigation.
+\textbf{Website Notifications:} Alerts are displayed directly on the user’s dedicated dashboard on the website.. Users can review the alert details and access a recorded snippet of the audio to quickly assess the situation.
 
-\textbf{SMS Alerts:} If configured, SMS alerts can be sent to the primary phone number or emergency contact provided during registration. This ensures that users receive alerts even in areas with limited internet connectivity.
+\textbf{Mandatory User Response:} Users are required to mark each alert as either true or false. If no action is taken within a predefined time frame, the alert will continue to generate warnings, ensuring the issue is not overlooked. This mechanism ensures accountability and timely resolution, particularly in sensitive scenarios like elderly care or child monitoring.
 
-\textbf{Emergency Escalation:} If an alert is not acknowledged or responded to within a predefined time frame, the system can automatically escalate the alert to an emergency contact. This feature is particularly useful in scenarios like elderly care or child monitoring, where immediate attention is critical.
 
 \subsection{Dataset Requirements}
 \subsubsection{Normal Data Requirements}
@@ -257,99 +220,35 @@ Before using the dataset for model training, audio data must be preprocessed to 
 \end{itemize}
 
 \section{Design and Development Environment}
-\subsection{Choice of Software Development Platform}
 \begin{table}[H]
     \centering
-    \caption{Technology and language justification}
+    \caption{Design and Development Environment}
     \begin{adjustbox}{max width=\textwidth}
-    \begin{tabular}{|>{\centering\arraybackslash}m{1.7cm}|>{\centering\arraybackslash}m{1.8 cm}|m{5cm}|}
+        \begin{tabular}{|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.6cm}|m{4.8cm}|}
         \hline
         \textbf{Technology} & \textbf{Usage} & \textbf{Justification} \\
         \hline
-        Linux VPS (on AWS) & Web server hosting & 
-        \begin{itemize}
-            \item Easier to configure than a Windows Server
-            \item \textbf{Light OS}: Make it easier to deploy and leave more space for the website.
-            \item \textbf{Fast File System}: Reduce the delay of response of the server because the OS read files faster.
-            \item \textbf{Technologies availability}: Most software are available on Linux.
-        \end{itemize} \\
+        Google Colab & AI Model Development & Provides a cloud-based environment with free access to an NVIDIA Tesla T4 GPU. Allows easy storage and sharing of audio data and model outputs via Google Drive. \\
         \hline
-        Docker & Deployment, Containerization  & 
-        \begin{itemize}
-            \item \textbf{Better scalability}: Dockerize services composing our software make easier hardware and software upgrades.
-            \item \textbf{Better interoperability}: Containers can be deployed on different OS without causing a bunch of issues.
-            \item \textbf{Service Management}: With every services in a container we can update, stop or restart them easily.
-        \end{itemize} \\
+        Python (PyTorch) & AI Programming & Used for developing the AI model due to its extensive libraries and compatibility with PyTorch, which is preferred for modern AI practices. Ensures flexibility for both preprocessing tasks and model training. \\
         \hline
-        Spring Boot 3 (Java) & back-end Development, API Management, Security & 
-        \begin{itemize}
-            \item \textbf{Microservice Architecture}: Supports modular development, crucial for building scalable and maintainable systems.
-            \item \textbf{API Development}: Simplifies REST API creation, enabling seamless communication with the front-end.
-            \item \textbf{Built-in Security}: Offers authentication and authorization mechanisms like OAuth2 and JWT, enhancing security for sensitive user data.
-            \item \textbf{Database Integration}: Easily connects to SQL/NoSQL databases, essential for managing data such as alerts, user profiles, and sound analysis logs.
-            \item \textbf{Java}: Spring Boot uses Java, which is highly stable, widely supported, and suitable for enterprise-level applications, providing robust back-end performance.
-        \end{itemize} \\
+        AWS Lambda & AI Model Deployment & A serverless platform for deploying the AI model. It allows on-demand execution, reducing costs and avoiding the need for continuous server management. Docker is used to package the model and dependencies for consistent runtime behavior. \\
         \hline
-        Vue.js 3 (TypeScript) & front-end Development, Real-time User Interface & 
-        \begin{itemize}
-            \item \textbf{Lightweight \& Fast}: Minimal footprint ensures fast loading times, ideal for responsive user interfaces on both mobile and web platforms.
-            \item \textbf{Reactive Components}: Real-time data binding allows users to receive alerts instantly without refreshing the page.
-            \item \textbf{Component-Based Structure}: Enables the creation of reusable UI elements for dashboards, alerts, and login forms.
-            \item \textbf{TypeScript}: Using TypeScript with Vue.js provides type safety, reducing runtime errors and making the front-end codebase more maintainable and scalable.
-        \end{itemize} \\
+        AWS EC2 (Linux) & Front-end and Back-end Hosting & Both the front-end and back-end are deployed on AWS EC2 instances. Linux is chosen for its lightweight environment, efficiency, and compatibility with Dockerized applications. \\
+        \hline
+        Docker & Deployment & Used to containerize the AI model for AWS Lambda and to deploy the front-end and back-end on AWS EC2. Simplifies deployment and ensures consistency between environments. \\
+        \hline
+        Spring Boot 3 (Java) & Back-end Development & A popular framework with extensive documentation and tools, aligning with the team's expertise, simplifying development and maintenance. \\
+        \hline
+        Vue.js 3 (TypeScript) & Front-end Development & Lightweight and fast framework for responsive UIs, supports real-time data binding for instant alerts, and provides a maintainable and scalable codebase using TypeScript. \\
         \hline
     \end{tabular}
     \end{adjustbox}
 \end{table}
 
-\subsection{AI Development Platform}
-This project aims to develop an AI model for detecting anomalies in audio data. The development is performed using \textbf{Google Colab}, which provides a cloud-based environment with access to an NVIDIA Tesla T4 GPU at no cost. The model’s code, data, and outputs are stored on Google Drive for easy access and sharing.
 
-\subsubsection{Platform and Resources}
-\begin{itemize}
-    \item \textbf{Platform}: The development environment is Google Colab, a cloud-based platform offering free GPU resources.
-    \item \textbf{Hardware}: The provided NVIDIA Tesla T4 GPU meets the project’s computational requirements.
-    \item \textbf{Storage}: Audio files and generated mel spectrograms are stored on Google Drive, allowing for easy file sharing and collaborative work.
-\end{itemize}
 
-\subsubsection{Programming Language}
-\textbf{Python} is used as the primary programming language due to its versatility and widespread adoption in machine learning. Python offers extensive libraries, making it highly suitable for one-time preprocessing tasks and deep learning model development. For this project:
-\begin{itemize}
-    \item The initial codebase was based on an existing audio anomaly detection notebook, which can be accessed at the following link: \href{https://colab.research.google.com/github/gefleury/datascientest_anomalous_sounds/blob/main/notebooks/ASD_clf_sounds_DL_from_machine_clf.ipynb#scrollTo=Wl7ZFXd3igl3}{Audio Anomaly Detection Notebook}.
-    \item The framework was modified from \texttt{Keras} to \texttt{PyTorch} for compatibility with modern practices, as \texttt{PyTorch} has become more prevalent in the AI research community and the AI developer is more familiar with  \texttt{PyTorch}.
-\end{itemize}
 
-\subsubsection{Software Versions}
-To ensure compatibility and reproducibility, the following versions are used in this project:
-\begin{itemize}
-    \item \textbf{Python}: 3.10 (Colab default)
-    \item \textbf{CUDA}: 12.2 (for GPU acceleration)
-    \item \textbf{Torch}: 2.5.0+cu121
-    \item \textbf{Torchaudio}: 2.5.0+cu121
-\end{itemize}
-
-\subsection{Model Deployment}
-The deployment of the AI model for anomaly sound detection is planned to be executed on Amazon Web Services (AWS) using a serverless approach. This strategy uses AWS Lambda and API Gateway to host the model, ensuring scalability, cost efficiency, and minimal infrastructure management. By utilizing Lambda, the model is loaded and served on-demand, allowing for quick responses to inference requests without the need for a continuously running server. This approach is chosen over AWS SageMaker because SageMaker introduces significant overhead and is primarily designed for high-throughput or continuous workloads. Given the relatively low frequency of model calls, SageMaker would add unnecessary complexity and pose a risk of escalating costs due to the complexity.
-
-\subsubsection{Platform and Resources} 
-\begin{itemize} 
-    \item \textbf{Platform}: The deployment environment will be AWS Lambda, using a custom Docker container to package the model and all necessary dependencies.
-    \item \textbf{Containerization with Docker}: The model and dependencies (PyTorch, NumPy, etc.) are packaged into a Docker container image, ensuring consistent runtime behavior. This container allows AWS Lambda to execute the model with all required libraries, avoiding compatibility issues.
-    \item \textbf{Hardware}: AWS Lambda functions dynamically allocate resources based on workload requirements. For this project, a CPU-based instance is sufficient given the expected low call frequency, reducing both cost and complexity.
-    \item \textbf{Model Format}: The model is saved in .pt format (PyTorch model format), compatible with the Lambda function configured to use PyTorch libraries within the Docker container.
-\end{itemize}
-
-\subsubsection{Programming Language and Environment} 
-The deployed model will continue to use Python as the programming language, given its compatibility with PyTorch and widespread support in AWS Lambda. 
-
-\subsubsection{Software Versions and Dependencies in Docker} 
-The Docker container provides a consistent environment for the Lambda function, ensuring compatibility and reproducibility: 
-\begin{itemize} 
-    \item Base Image: public.ecr.aws/lambda/python:3.8 (AWS Lambda Python 3.8 base image).
-    \item Dependencies: The Dockerfile includes the installation of PyTorch, NumPy, and other required libraries.
-    \item Python Version: 3.8, as provided by the AWS Lambda base image.
-    \item Torch and Torchaudio Versions: Compatible versions are specified in the Dockerfile to ensure consistency with the .pt model format.
-\end{itemize}
 
 \section{Cost Estimation}
 \subsection{AI Model Development}
@@ -367,25 +266,27 @@ For this serverless deployment, AWS charges are based on the compute time used p
     \item Total Cost: The combined costs for AWS Lambda and API Gateway for a few daily calls are estimated at approximately 0.60–1.50 Dollar per month. 
 \end{itemize}
 
+\subsection{Application Deployment on AWS EC2}
+This project deploys the front-end and back-end on AWS EC2 instances:
+\begin{itemize}
+    \item \textbf{EC2 Instance Cost}: Using a t3.small instance for both the front-end and back-end is sufficient for the expected traffic. The monthly cost is approximately 3 Dollars per instance, depending on usage and data transfer.
+    \item \textbf{Storage Cost}: The required EBS storage for each instance is minimal (around 20GB). The estimated cost is approximately 1–2 Dollars per month.
+    \item \textbf{Total Cost}: Deploying both instances (front-end and back-end) is estimated at 10 dollars per month, including data transfer and storage.
+\end{itemize}
+
 \section{Implementation and Integration}
+
 \subsection{Login System}
 The login system allows users to securely access their accounts using their email and password. Users can also opt for a password recovery mechanism through email verification. Spring Boot handles back-end processes, including password encryption using SHA-256 and validation against the database. Vue.js ensures the front-end provides an intuitive and seamless experience for users, with error handling and clear feedback messages on incorrect login attempts or successful authentication.
-
-\subsection{Administrator Back-office}
-Administrators can manage user accounts and feedback tickets through a dedicated back-office interface. The back-office allows viewing, sorting, and filtering user accounts and ticket status. This module leverages Spring Boot for back-end operations and Vue.js for front-end management tools.
 
 \subsection{User Dashboard}
 The dashboard gives users access to view historical alerts, manage personal information, and configure system settings. It features filters to sort alerts by type and date, allowing users to analyze past events. The front-end, developed with Vue.js, ensures responsive design across devices. Spring Boot manages the back-end, ensuring secure communication and data retrieval from the database.
 
-\subsection{Feedback tickets sending}
-A specific interface allows users to send feedback to the administrators through tickets. This interface would have some basic text editing features such as italic font, bold font, etc. This interface is made with Vue.js. On server side, this feature needs a few API end-points (to create and delete) and a table in the database.
-
-\subsection{Alerts and Notifications}
-The system provides multi-channel notifications through push notifications and emails when abnormal sounds are detected. Vue.js powers the user interface where users can configure alert preferences. Spring Boot manages the back-end operations for sending alerts and handling the escalation process in case of unacknowledged alerts.
+\subsection{Alerts}
+The system sends alerts to the front-end when abnormal sounds are detected. Users can view and manage these alerts through the interface, which allows them to respond appropriately to the detected events.
 
 \subsection{Real-time Sound Monitoring}
- The back-end, built using Spring Boot, communicates with the machine learning models, which detect abnormal sounds such as breaking glass, loud noises, or sudden silence. Python models, integrated through APIs, perform sound analysis and anomaly detection, ensuring efficient real-time monitoring.
-
+The back-end, built using Spring Boot, communicates with the machine learning models, which detect abnormal sounds such as breaking glass, loud noises, or sudden silence. Python models, integrated through APIs, perform sound analysis and anomaly detection, ensuring efficient real-time monitoring.
 
 \subsection{Machine Learning Integration}
 Machine learning models play a vital role in anomaly detection. Supervised models identify patterns based on pre-labeled audio data, while unsupervised learning models recognize new and unusual sounds by learning typical household environments. These models are trained using Python and integrated into the system via APIs provided by the Spring Boot back-end.
@@ -424,24 +325,23 @@ Each trimmed audio file is converted into a mel spectrogram, which provides a ti
     \item \textbf{Save as .npy Files}: Save each spectrogram as an \texttt{.npy} file in a structured directory to facilitate easy access during training.
 \end{itemize}
 
-\section{AI Implementation Process}
-\label{AI Impls}
+\subsection{AI Implementation Process}
 The following section describes the main stages involved in implementing the AI model for audio anomaly detection under the development environment on Google Colab with Python and PyTorch.
 
-\subsection{Data Preparation and Loading}
+\subsubsection{Data Preparation and Loading}
 \begin{itemize}
     \item \textbf{Data Collection}: The mel spectrograms for the audio files are stored in Google Drive and are structured into folders based on the type of sound (e.g., normal or anomaly).
     \item \textbf{Dataframe Creation}: A function is used to load the mel spectrograms and create a structured dataframe, labeling each entry based on sound type and directory (train or test). The data is split so that 15\% of samples are used for testing, and the rest are used for training.
 \end{itemize}
 
-\subsection{Data Generator}
+\subsubsection{Data Generator}
 The data generator function is responsible for loading data in batches during training and validation:
 \begin{itemize}
     \item \textbf{Shuffling and Batch Creation}: To avoid overfitting and ensure variety, data is shuffled and loaded in small batches. Each batch contains both the mel spectrograms and their corresponding labels.
     \item \textbf{One-Hot Encoding of Labels}: Labels are converted to a one-hot encoded format to support multi-class classification.
 \end{itemize}
 
-\subsection{Model Architecture (CNN with Regularization)}
+\subsubsection{Model Architecture (CNN with Regularization)}
 The model is implemented as a Convolutional Neural Network (CNN) with regularization techniques such as dropout and batch normalization to improve generalization. The main components are:
 \begin{itemize}
     \item \textbf{Convolutional Layers}: Extract spatial features from the mel spectrograms. Each convolutional layer is followed by batch normalization and pooling.
@@ -449,13 +349,14 @@ The model is implemented as a Convolutional Neural Network (CNN) with regulariza
     \item \textbf{Output Layer}: A softmax activation function is applied in the final layer to classify sounds into six categories.
 \end{itemize}
 
-\subsection{Training and Validation Loop}
+\subsubsection{Training and Validation Loop}
 The training function, \texttt{fit\_and\_predict\_model}, manages the training and validation of the model:
 \begin{itemize}
     \item \textbf{Data Splitting}: The function divides the data into training and validation sets, using 80\% for training and 20\% for validation within the training dataset.
     \item \textbf{Loss Function and Optimization}: The model is trained using Cross-Entropy Loss for multi-class classification, and the optimizer is Adam with L2 regularization.
     \item \textbf{Training Epochs and Early Stopping}: The model is trained over multiple epochs, and early stopping is used to prevent overfitting by monitoring validation loss.
 \end{itemize}
+
 
 \begin{figure}[h!]
     \centering
@@ -501,7 +402,7 @@ The training function, \texttt{fit\_and\_predict\_model}, manages the training a
 \subsection{Overall architecture}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{ziggsDB.png}
+    \includegraphics[width=0.75\linewidth]{ziggsDB.png}
     \caption{Database structure}
     \label{fig:database}
 \end{figure}
@@ -525,60 +426,68 @@ The training function, \texttt{fit\_and\_predict\_model}, manages the training a
 \hline
 \textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
 
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ config & 
+AwsS3Config.java \newline 
+FirebaseConfig.java \newline 
+WebConfig.java & 
+Config \\ \hline
+
 Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ controller & 
 AlertController.java \newline 
 AuthController.java \newline 
-FeedbackTicketController.java \newline 
-HouseController.java \newline
-NotificationController.java \newline 
+DeviceController.java \newline 
+FileUploadController.java \newline 
+HouseController.java \newline 
 SecureController.java \newline 
 SoundDataController.java \newline 
-UserController.java & 
+UserController.java& 
 Controller \\ \hline
 
-Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ service & 
-AlertService.java \newline 
-FeedbackTicketService.java \newline 
-HouseService.java \newline 
-NotificationService.java \newline 
-SoundDataService.java\newline 
-UserService.java & 
-Service \\ \hline
-
-Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ repository & 
-AlertRepository.java \newline 
-FeedbackTicketRepository.java \newline 
-HouseRepository.java \newline 
-NotificationRepository.java \newline 
-SoundDataRepository.java \newline 
-UserRepository.java  & 
-Repository \\ \hline
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ dto & 
+AlertDTO.java \newline 
+DeviceDTO.java \newline 
+LoginRequestDTO.java \newline 
+S3FileDTO.java \newline 
+SecureDTO.java \newline 
+SoundDataDTO.java \newline 
+UserDTO.java \newline 
+UserIdDTO.java & 
+DTO \\ \hline
 
 Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ entity & 
 Alert.java \newline 
-FeedbackTicket.java \newline 
-House.java \newline
-Notification.java \newline 
-SoundData.java \newline
-User.java & 
+Device.java \newline 
+House.java \newline 
+SoundData.java \newline 
+User.java& 
 Entity \\ \hline
 
-Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ dto & 
-LoginRequestDTO.java \newline 
-UserDTO.java \newline 
-UserId.java
-& 
-DTO \\ \hline
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ repository & 
+AlertRepository.java \newline 
+DeviceRepository.java \newline 
+HouseRepository.java \newline 
+SoundDataRepository.java \newline 
+UserRepository.java & 
+Repository \\ \hline
 
-Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ config & 
-FirebaseConfig.java \newline 
-WebConfig.java & 
-Configuration \\ \hline
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ security & 
+FirebaseAuthInterceptor.java \newline 
+PasswordHasher.java \newline 
+SecurityConfig.java & 
+Security \\ \hline
+
+Ziggs\_Backend/ src/main/java/ com/ziggs/ ziggs\_backend/ service & 
+AlertService.java \newline 
+DeviceService.java \newline 
+HouseService.java \newline 
+S3Service.java \newline 
+SoundDataService.java \newline 
+UserService.java & 
+Service \\ \hline
 
 Ziggs\_Backend/ src/main/resources & 
-application.properties \newline 
-application.properties.example \newline 
-ziggs-7421a-firebase-adminsdk-2ivcm-8b8925d87b.json & 
+application.yml \newline 
+serviceAccountKey.json & 
 Resources \\ \hline
 
 Ziggs\_Backend & 
@@ -588,6 +497,7 @@ Docker \\ \hline
 Ziggs\_Backend & 
 pom.xml & 
 Build \\ \hline
+
 
 \end{tabular}
 \caption{Directory Structure and Modules for Backend}
@@ -630,13 +540,22 @@ This module structures data for specific use cases, such as API requests and res
 
 \textbf{Configuration:}  
 
-The configuration module manages external library integrations and application settings. It includes files like \texttt{FirebaseConfig} for setting up Firebase authentication and \texttt{WebConfig} for defining interceptors or CORS policies. This module ensures seamless scalability and easy customization of application behavior without altering the core logic.
+The configuration module manages external library integrations and application settings. It includes files like:
+
+\begin{itemize}
+    \item \textbf{FirebaseConfig}: Sets up Firebase authentication.
+    \item \textbf{WebConfig}: Defines interceptors and CORS policies.
+    \item \textbf{AwsS3Config}: Configures AWS S3 integration by injecting access keys, region, and creating an Amazon S3 client bean for seamless interaction with S3 buckets.
+\end{itemize}
+
+This module ensures scalability, adaptability, and easy customization of application behavior without modifying the core logic.
+
 
 \vspace{0.5cm}
 
 \textbf{Resources:}  
 
-This directory contains essential configuration files required for the application to run properly. It includes \texttt{application.properties} for defining environment-specific settings (e.g., database connections) and Firebase credentials for integrating authentication services. These files centralize setup details and streamline environment configuration.
+This directory contains essential configuration files required for the application to run properly. It includes \texttt{application.yml} for defining environment-specific settings (e.g., database connections) and Firebase credentials for integrating authentication services as well as S3 connection. These files centralize setup details and streamline environment configuration.
 
 \vspace{0.5cm}
 
@@ -712,7 +631,7 @@ The application code (\texttt{app.py}, \texttt{model.py}) and the trained model 
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|m{2.6cm}|m{3.5cm}|m{1.6cm}|}
+\begin{tabular}{|m{2.6cm}|m{3.5cm}|>{\raggedright\arraybackslash}m{1.6cm}|}
 \hline
 \textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
 
@@ -727,6 +646,7 @@ routes.js &
 Routing \\ \hline
 
 Vue\_Frontend/src/ assets/ & 
+audio/*.wav \newline
 css/*.css \newline
 fonts/*.woff \newline
 fonts/*.woff2 \newline
@@ -744,18 +664,30 @@ Vue\_Frontend/src/  components/ &
 Button.vue \newline
 Dropdown.vue \newline
 FormCompenent.vue \newline
-LabelledInput.vue \newline
 ziggTable.vue \newline
+DragModal.vue \newline
 Inputs/formGroupInput.vue \newline
+Inputs/LabelledInput.vue \newline
 index.js & 
 Vue Components \\ \hline
 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|m{2.6cm}|m{3.5cm}|m{1.6cm}|}
+\hline
+\textbf{Directory} & \textbf{File Names} & \textbf{Module} \\ \hline
+
 Vue\_Frontend/src/ components/Cards & 
+BasicCard.vue \newline
 Card.vue \newline
 ChartCard.vue \newline
 StatsCard.vue \newline
 TableCard.vue & 
-Card Vue Components \\ \hline
+Card Vue Components\\ \hline
 
 Vue\_Frontend/src/ components/ SidebarPlugin & 
 SidebarLink.vue \newline
@@ -768,22 +700,30 @@ Vue\_Frontend/src/ layout &
 AlarmTab.vue \newline
 FooterComponent.vue \newline
 GlobalyLayout.vue \newline
-HeaderComponent.vue & 
+HeaderComponent.vue \newline
+ModalLayout.vue & 
 Layouts \\ \hline
 
 Vue\_Frontend/src/ layout/dashboard & 
+AlarmHandlingModal.vue \newline
+AlarmModal.vue \newline
 Content.vue \newline
 ContentFooter.vue \newline
 DashboardLayout.vue \newline
 MobileMenu.vue \newline
+NotificationTable.vue \newline
 TopNavbar.js & 
 Dashboard Layout \\ \hline
 
 Vue\_Frontend/src/ pages & 
 Dashboard.vue \newline
+Devices.vue \newline
+Login.vue \newline
 Maps.vue \newline
 NotFoundPage.vue \newline
 Notificiations.vue \newline
+Recording.vue \newline
+Signin.vue \newline
 TableList.vue \newline
 Typography.vue \newline
 UserProfile.vue  \newline
@@ -791,11 +731,10 @@ Notifications/ NotificationTemplate.vue &
 Pages \\ \hline
 
 Vue\_Frontend/src/ pages/UserProfile & 
-components/edit-household-modal.vue \newline
-components/edit-modal.vue \newline
-components/invite-modal.vue \newline
-EditProfileForm.vue \newline
-HouseCard.vue \newline
+components/edit-house-infos-modal.vue \newline
+components/edit-house-members-modal.vue \newline
+HouseInfos.vue \newline
+HouseMember.vue \newline
 UserCard.vue & 
 User Profile Components \\ \hline
 
@@ -803,7 +742,7 @@ Vue\_Frontend/src/ plugins &
 globalComponents.js \newline
 ziggDashboard.js \newline
 globalDirectives.js & 
-Plugins \\ \hline
+Plugins\& Global Functions\\ \hline
 
 \end{tabular}
 \caption{Directory Structure and Modules for Front-end}
@@ -863,7 +802,7 @@ This sub-folder of the Layouts module is meant to store the Dashboard component 
 
 This Pages module contain the pages components of the project. These components may use or complete a layout with more specific information. Pages components are basically the components that are displayed to the user. Some pages may use its own components, in this case the page and its components can be put in the same folder.
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \textbf{User Profile Components:}
 
@@ -871,14 +810,11 @@ This sub-folder of the Pages module stores the User Profile page and its sub-com
 
 \vspace{0.5cm}
 
-\textbf{Plugins:}  
+\textbf{Plugins \& Global functions:}  
 
-The Plugins module is used to import external libraries and globalize their components to the whole project.
+The Plugins module is used to import external libraries and globalize their components to the whole project. It is also used to make some functions global in the project such as the request to execute HTTP Requests.
 
-
-
-\textbf{Modules:}  
-
+\vspace{0.5cm}
 \textbf{Login/Create Account Page}
 
 This module handles user authentication and account creation using [specify technology or framework, e.g., Firebase, OAuth]. It supports multiple authentication methods, including email/password and social media logins. Upon successful login or account creation, the user is redirected to the dashboard. User session management is implemented to maintain login states across visits. The authentication process is asynchronous, with progress animations to enhance the user experience during the wait.
@@ -987,7 +923,7 @@ When the form is completed and submitted, the household information are updated.
 \end{figure}
 
 Figure \ref{fig:devices} shows the "Devices" section of the dashboard.
-This section can be accessed by clicking on the "Devices" button on the side menu. From this page users are able to add new devices linked to their household or remove the existing devices.
+This section can be accessed by clicking on the "Devices" button on the side menu. From this page users are able to add new devices linked to their home or remove the existing devices.
 
 \begin{figure}[H]
     \centering
@@ -996,7 +932,40 @@ This section can be accessed by clicking on the "Devices" button on the side men
     \label{fig:devices}
 \end{figure}
 
+Figure \ref{fig:host_device} shows the popup to add the device you are on to your device list. It can be accessed from the device dashboard, clicking on "Add a new device" and "Add this device".
+Once validated, the recording page opens in a new tab.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{add_host_device_use_case.png}
+    \caption{Adding host device popup}
+    \label{fig:host_device}
+\end{figure}
+
+Figure \ref{fig:lg_devices} shows the popup to add other LG connected devices. It can be accessed from the device dashboard, clicking on "Add a new device" and "Add LG Device".
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{add_LG_device_use_case.png}
+    \caption{Adding LG Device popup}
+    \label{fig:lg_devices}
+\end{figure}
+
+Figure \ref{fig:recording} shows the recording web page. This page works only on devices that have been linked to an account. Once the start button has been clicked and the microphone allowed, this page records the surrounding sounds continuously. Records are cut in 5 seconds pieces that are sent to the Back-end server for analysis by the AI Model.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{recording_screen.png}
+    \caption{Sound Recording screen}
+    \label{fig:recording}
+\end{figure}
+
+
+\section{Discussion}
+During the project, we faced several challenges. One notable difficulty was the lack of consistent organization. Despite initial plans, there were moments where deadlines crept up on us, leading to a rushed approach to certain tasks. This was particularly evident in the integration phase, where the frontend development lagged significantly behind the backend and AI model progress. This disconnect meant that the final stages required an intense push to bring everything together seamlessly. While we managed to pull it off, it was a stressful experience that could have been avoided with better coordination and a more synchronized development timeline.
+\newline 
+
+On a positive note, these challenges provided valuable learning opportunities. We gained insights into the importance of regular communication, task prioritization, and maintaining alignment across different project components. Working under pressure also highlighted our ability to adapt and problem-solve effectively as a team. In the end, we are proud of what we accomplished. The experience not only improved our technical skills but also strengthened our ability to navigate the complexities of collaborative projects. While there is certainly room for improvement, we are leaving this project with a sense of achievement and lessons that will undoubtedly guide us in future endeavors.
 
 \end{document}
 
